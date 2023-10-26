@@ -12,6 +12,5 @@ export class UpdateUserDto {
   @IsEmail({}, { message: ValidationMessages.EMAIL_MUST_BE_EMAIL })
   @MinLength(2, { message: ValidationMessages.PASSWORD_IS_TOO_SHORT + 2 })
   @MaxLength(50, { message: ValidationMessages.PASSWORD_IS_TOO_LONG + 50 })
-  @IsOptional()
   email: string;
 }
