@@ -38,6 +38,7 @@ describe("UserRepository", () => {
   describe('findByEmail', () => {
     it('should find a user by their email', async () => {
       const mockUser = new User();
+      mockUser.email = 'test@example.com';
       mockRepository.findOne.mockResolvedValue(mockUser);
 
       const result = await UserRepository.findByEmail('test@example.com');
