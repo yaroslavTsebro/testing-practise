@@ -4,7 +4,7 @@ import { TokenPayload } from "../../../src/entity/dto/token-payload";
 import { config } from "../../../src/config/config";
 
 jest.mock('jsonwebtoken');
-jest.mock('../config/config', () => ({
+jest.mock('../../../src/config/config', () => ({
   server: {
     jwt: {
       expiresInAccess: '1h',  

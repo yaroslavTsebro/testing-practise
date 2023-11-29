@@ -6,8 +6,10 @@ import userRepository from "../../../src/repository/user-repository";
 import UserService from "../../../src/service/user-service";
 import { ErrorMessages } from "../../../src/constant/error-messages";
 
-jest.mock('../repository/user-repository');
-jest.mock('../service/jwt-service');
+jest.mock('typeorm')
+jest.mock("../../../src/repository/user-repository.ts");
+jest.mock('../../../src/service/user-service');
+jest.mock('../../../src/service/jwt-service');
 jest.mock('bcrypt');
 
 describe('UserService', () => {

@@ -11,8 +11,10 @@ import userService, { TokenResponse } from "../../../src/service/user-service";
 import { Response, Request, NextFunction } from "express";
 import { JwtPayload } from "jsonwebtoken";
 
-jest.mock("../../../src/service/user-service.ts");
+jest.mock("typeorm");
 jest.mock("class-transformer");
+jest.mock("../../../src/service/user-service.ts");
+jest.mock("../../../src/repository/user-repository.ts");
 
 const mockRequest = (): Request & { user?: JwtPayload } => {
   return {} as Request & { user?: JwtPayload };
