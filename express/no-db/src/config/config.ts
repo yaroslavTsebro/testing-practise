@@ -4,13 +4,20 @@ import dotenv from "dotenv";
 import { DefaultConfigValues } from "../constant/default-config-values";
 
 const env = process.env.NODE_ENV;
-fs.access(ConfigValues.CONFIG_PATH + ConfigValues.ENV_EXTENSION + env, () => {
-  dotenv.config({
-    path: ConfigValues.CONFIG_PATH + ConfigValues.DEVELOPMENT_EVN,
-  });
-});
-dotenv.config({
-  path: ConfigValues.CONFIG_PATH + ConfigValues.ENV_EXTENSION + env,
+const defaultFilePath = ConfigValues.CONFIG_PATH + ConfigValues.DEVELOPMENT_EVN;
+const currentFilePath =
+  ConfigValues.CONFIG_PATH + ConfigValues.ENV_EXTENSION + env;
+
+fs.access(currentFilePath, (error) => {
+  if (error) {
+    dotenv.config({
+      path: defaultFilePath,
+    });
+  } else {
+    dotenv.config({
+      path: currentFilePath,
+    });
+  }
 });
 
 export const config = {
