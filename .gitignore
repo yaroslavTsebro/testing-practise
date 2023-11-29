@@ -1,1 +1,3 @@
 express/no-db/node_modules
+express/no-db/coverage
+express/in-memory/node_modules
