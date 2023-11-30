@@ -1,12 +1,12 @@
-import "reflect-metadata";
-import { createServer, Server as HttpServer } from "http";
 import cookieParser from "cookie-parser";
+import { createServer, Server as HttpServer } from "http";
+import "reflect-metadata";
 import { errorHandlerMiddleware } from "./middleware/error-handler-middleware";
 
-import { config } from "./config/config";
-import express, { Application } from "express";
 import cors from "cors";
-import { db } from "./entity/db/connect";
+import express, { Application } from "express";
+import { config } from "./config/config";
+import { myDataSource } from "./entity/db/connect";
 import { mainRouter } from "./router";
 
 export class Server {
@@ -16,16 +16,27 @@ export class Server {
 
   constructor() {
     this.PORT = config.server.port;
+    this.connectToDB();
     this.app = express();
-    this.httpServer = createServer(this.app);
     this.configureServer();
+    this.httpServer = createServer(this.app);
+  }
+
+  private connectToDB() {
+    myDataSource
+      .then(() => {
+        console.log("Data Source has been initialized!");
+      })
+      .catch((err) => {
+        console.error("Error during Data Source initialization:", err);
+        process.exit(1);
+      });
   }
 
   private configureServer() {
     const corsOptions = {
       origin: "*",
     };
-    db.then();
     this.app.use(cors(corsOptions));
     this.app.use(cookieParser());
     this.app.use(express.json());
