@@ -1,13 +1,14 @@
-import { DataSource } from "typeorm";
+import { DataSource, createConnection } from "typeorm";
 import { User } from "./model/user";
 
-export const db = new DataSource({
+export const myDataSource = createConnection({
   type: "postgres",
   host: "localhost",
   port: 5432,
-  username: "root",
-  password: "admin",
+  username: "postgres",
+  password: "zsbldqpk56",
   database: "test",
-  entities: [User],
+  entities: ["src/entity/db/model/*.ts"],
+  logging: true,
   synchronize: true,
-}).initialize();
+});

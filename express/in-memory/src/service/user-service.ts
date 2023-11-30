@@ -11,7 +11,7 @@ import bcrypt from "bcrypt";
 import { LoginUserDto } from "../entity/dto/login-user-dto";
 import { UpdateUserDto } from "../entity/dto/update-user-dto";
 
-type TokenResponse = Promise<{
+export type TokenResponse = Promise<{
   accessToken: string;
   user: TokenPayload;
 }>;
